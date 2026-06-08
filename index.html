@@ -265,6 +265,10 @@
         </div>
       </div>
       <div class="field-group">
+        <label class="field-label">Nombre del Restaurante</label>
+        <input class="field-input" id="f-restaurante" type="text" placeholder="Ej: Burger House, Taco Loco..." oninput="updatePreview()">
+      </div>
+      <div class="field-group">
         <label class="field-label">Nombre del Cliente</label>
         <input class="field-input" id="f-cliente" type="text" placeholder="Nombre completo" oninput="updatePreview()">
       </div>
@@ -475,9 +479,10 @@
 
   // ── BUILD CUERPO ───────────────────────────────────
   function buildCuerpo() {
-    const numero   = document.getElementById('f-numero').value.trim();
-    const hora     = document.getElementById('f-hora').value;
-    const cliente  = document.getElementById('f-cliente').value.trim();
+    const numero      = document.getElementById('f-numero').value.trim();
+    const hora        = document.getElementById('f-hora').value;
+    const restaurante = document.getElementById('f-restaurante').value.trim();
+    const cliente     = document.getElementById('f-cliente').value.trim();
     const direccion= document.getElementById('f-direccion').value.trim();
     const productos= document.getElementById('f-productos').value.trim();
     const total    = document.getElementById('f-total').value.trim();
@@ -495,6 +500,7 @@ Por medio del presente correo, ${CONFIG.empresa}, con dirección en ${CONFIG.dir
 DATOS DEL PEDIDO
 ━━━━━━━━━━━━━━━━━━━━━━━━━
 Número de pedido : ${numero || '—'}
+Restaurante      : ${restaurante || '—'}
 Fecha            : ${fechaStr}
 Hora             : ${hora || '—'}
 Cliente          : ${cliente || '—'}
