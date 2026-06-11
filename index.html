@@ -18,279 +18,178 @@
     --purple: #a04fff;
     --danger: #ff4466;
     --text: #f0f0f8;
-    --text-muted: #6060a0;
+    --muted: #6060a0;
     --success: #00e5a0;
-    --radius: 18px;
-    --radius-sm: 11px;
-
-    /* Section colors */
-    --c1: #4f9fff;   /* foto */
-    --c2: #06C167;   /* plataforma */
-    --c3: #FF8000;   /* datos */
-    --c4: #a04fff;   /* incidencia */
-    --c5: #00e5a0;   /* preview */
-    --c6: #ff4466;   /* informe */
+    --r: 16px;
+    --rsm: 10px;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100dvh; overflow-x: hidden; }
+  body::before { content:''; position:fixed; inset:0; background: radial-gradient(ellipse 80% 40% at 50% -5%, rgba(79,159,255,0.07) 0%, transparent 55%); pointer-events:none; z-index:0; }
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    min-height: 100dvh;
-    overflow-x: hidden;
-  }
+  .app { max-width: 480px; margin: 0 auto; padding: 0 0 180px; position: relative; z-index: 1; }
 
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background:
-      radial-gradient(ellipse 80% 40% at 50% -5%, rgba(79,159,255,0.07) 0%, transparent 55%),
-      radial-gradient(ellipse 50% 40% at 95% 85%, rgba(6,193,103,0.05) 0%, transparent 50%);
-    pointer-events: none; z-index: 0;
-  }
-
-  .app { max-width: 480px; margin: 0 auto; padding: 0 0 200px; position: relative; z-index: 1; }
-
-  /* ── HEADER ── */
-  .header {
-    padding: 16px 20px 14px;
-    display: flex; align-items: center; justify-content: space-between;
-    border-bottom: 1px solid var(--border);
-    background: rgba(8,8,15,0.97); backdrop-filter: blur(16px);
-    position: sticky; top: 0; z-index: 100;
-  }
+  /* HEADER */
+  .header { padding: 16px 20px 14px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); background: rgba(8,8,15,0.97); backdrop-filter: blur(16px); position: sticky; top: 0; z-index: 100; }
   .header-brand { display: flex; flex-direction: column; gap: 2px; }
-  .header-logo { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 4px; background: linear-gradient(90deg, #4f9fff, #00e5a0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
-  .header-sub { font-family: 'Space Mono', monospace; font-size: 8px; color: var(--text-muted); letter-spacing: 2.5px; text-transform: uppercase; }
-  .header-status { display: flex; align-items: center; gap: 6px; background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; padding: 6px 12px; font-family: 'Space Mono', monospace; font-size: 9px; color: var(--text-muted); letter-spacing: 1px; }
-  .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--success); animation: blink 2s infinite; }
+  .header-logo { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 4px; background: linear-gradient(90deg,#4f9fff,#00e5a0); -webkit-background-clip:text; -webkit-text-fill-color:transparent; line-height:1; }
+  .header-sub { font-family: 'Space Mono', monospace; font-size: 8px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+  .header-badge { display:flex; align-items:center; gap:6px; background:var(--surface2); border:1px solid var(--border); border-radius:20px; padding:6px 12px; font-family:'Space Mono',monospace; font-size:9px; color:var(--muted); }
+  .status-dot { width:6px; height:6px; border-radius:50%; background:var(--success); animation:blink 2s infinite; }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+  .timestamp { font-family:'Space Mono',monospace; font-size:9px; color:var(--muted); text-align:center; padding:8px; }
 
-  /* ── PROGRESS BAR ── */
-  .progress-bar {
-    display: flex; align-items: center; justify-content: center;
-    padding: 12px 20px 6px; gap: 6px;
-    background: rgba(8,8,15,0.97);
-    position: sticky; top: 60px; z-index: 99;
-    border-bottom: 1px solid var(--border);
-  }
-  .prog-step {
-    display: flex; align-items: center; gap: 6px;
-    font-family: 'Space Mono', monospace; font-size: 8px; letter-spacing: 1px;
-    color: var(--text-muted); transition: all 0.3s;
-  }
-  .prog-dot {
-    width: 22px; height: 22px; border-radius: 50%;
-    border: 2px solid var(--border);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 9px; font-weight: 700; transition: all 0.3s;
-    background: var(--surface);
-  }
-  .prog-step.done .prog-dot { background: var(--success); border-color: var(--success); color: #000; }
-  .prog-step.active .prog-dot { border-color: var(--accent); color: var(--accent); }
-  .prog-line { flex: 1; height: 1px; background: var(--border); max-width: 18px; }
-
-  .timestamp { font-family: 'Space Mono', monospace; font-size: 9px; color: var(--text-muted); text-align: center; padding: 8px; }
-
-  /* ── SECTIONS ── */
+  /* SECTIONS */
   .section { padding: 20px 20px 0; }
+  .section-label { font-family:'Bebas Neue',sans-serif; font-size:17px; letter-spacing:3px; margin-bottom:14px; display:flex; align-items:center; gap:10px; }
+  .section-label::after { content:''; flex:1; height:1px; background:var(--border); }
+  .section-num { font-size:9px; font-family:'Space Mono',monospace; border-radius:5px; padding:3px 7px; font-weight:700; letter-spacing:1px; }
+  .sec-1 .section-label { color:var(--uber); } .sec-1 .section-num { background:rgba(6,193,103,0.15); color:var(--uber); border:1px solid rgba(6,193,103,0.3); }
+  .sec-2 .section-label { color:var(--purple); } .sec-2 .section-num { background:rgba(160,79,255,0.15); color:var(--purple); border:1px solid rgba(160,79,255,0.3); }
+  .sec-3 .section-label { color:var(--accent); } .sec-3 .section-num { background:rgba(79,159,255,0.15); color:var(--accent); border:1px solid rgba(79,159,255,0.3); }
+  .sec-4 .section-label { color:var(--success); } .sec-4 .section-num { background:rgba(0,229,160,0.15); color:var(--success); border:1px solid rgba(0,229,160,0.3); }
+  .sec-5 .section-label { color:var(--danger); } .sec-5 .section-num { background:rgba(255,68,102,0.15); color:var(--danger); border:1px solid rgba(255,68,102,0.3); }
 
-  .section-label {
-    font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 3px;
-    margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
-  }
-  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-  .section-num {
-    font-size: 9px; font-family: 'Space Mono', monospace;
-    border-radius: 5px; padding: 3px 7px; font-weight: 700; letter-spacing: 1px;
-  }
+  /* PLATFORM */
+  .platform-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .platform-btn { background:var(--surface); border:2px solid var(--border); border-radius:var(--r); padding:18px 12px; cursor:pointer; transition:all 0.2s; display:flex; flex-direction:column; align-items:center; gap:7px; position:relative; }
+  .platform-btn:active { transform:scale(0.96); }
+  .platform-btn.uber.active { border-color:var(--uber); background:rgba(6,193,103,0.09); box-shadow:0 0 24px rgba(6,193,103,0.12); }
+  .platform-btn.just.active { border-color:var(--just); background:rgba(255,128,0,0.09); box-shadow:0 0 24px rgba(255,128,0,0.12); }
+  .platform-logo { font-family:'Bebas Neue',sans-serif; font-size:21px; letter-spacing:2px; line-height:1; }
+  .platform-btn.uber .platform-logo { color:var(--uber); }
+  .platform-btn.just .platform-logo { color:var(--just); }
+  .platform-email { font-family:'Space Mono',monospace; font-size:7px; color:var(--muted); text-align:center; line-height:1.5; }
+  .platform-check { position:absolute; top:8px; right:8px; width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9px; opacity:0; transform:scale(0); transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1); }
+  .platform-btn.uber .platform-check { background:var(--uber); }
+  .platform-btn.just .platform-check { background:var(--just); }
+  .platform-btn.active .platform-check { opacity:1; transform:scale(1); }
 
-  /* Section color themes */
-  .sec-1 .section-label { color: var(--c1); }
-  .sec-1 .section-num { background: rgba(79,159,255,0.15); color: var(--c1); border: 1px solid rgba(79,159,255,0.3); }
-  .sec-2 .section-label { color: var(--c2); }
-  .sec-2 .section-num { background: rgba(6,193,103,0.15); color: var(--c2); border: 1px solid rgba(6,193,103,0.3); }
-  .sec-3 .section-label { color: var(--c3); }
-  .sec-3 .section-num { background: rgba(255,128,0,0.15); color: var(--c3); border: 1px solid rgba(255,128,0,0.3); }
-  .sec-4 .section-label { color: var(--c4); }
-  .sec-4 .section-num { background: rgba(160,79,255,0.15); color: var(--c4); border: 1px solid rgba(160,79,255,0.3); }
-  .sec-5 .section-label { color: var(--c5); }
-  .sec-5 .section-num { background: rgba(0,229,160,0.15); color: var(--c5); border: 1px solid rgba(0,229,160,0.3); }
-  .sec-6 .section-label { color: var(--c6); }
-  .sec-6 .section-num { background: rgba(255,68,102,0.15); color: var(--c6); border: 1px solid rgba(255,68,102,0.3); }
+  /* INCIDENCIA BTNS */
+  .inc-list { display:flex; flex-direction:column; gap:10px; }
+  .inc-btn { background:var(--surface); border:2px solid var(--border); border-radius:var(--r); padding:16px 18px; cursor:pointer; transition:all 0.2s; display:flex; align-items:flex-start; gap:14px; position:relative; overflow:hidden; }
+  .inc-btn:active { transform:scale(0.99); }
+  .inc-btn.active { border-color:var(--purple); background:rgba(160,79,255,0.07); }
+  .inc-btn::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--purple); opacity:0; transition:opacity 0.2s; }
+  .inc-btn.active::before { opacity:1; }
+  .inc-icon { font-size:22px; min-width:38px; height:38px; background:var(--surface2); border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .inc-content { flex:1; }
+  .inc-title { font-family:'DM Sans',sans-serif; font-size:15px; font-weight:700; color:var(--text); margin-bottom:4px; line-height:1.3; }
+  .inc-sub { font-family:'Space Mono',monospace; font-size:8.5px; color:var(--muted); line-height:1.6; }
+  .inc-tag { display:inline-block; font-size:8px; padding:2px 7px; border-radius:4px; margin-top:5px; font-weight:700; letter-spacing:1px; text-transform:uppercase; }
+  .tag-both { background:rgba(79,159,255,0.15); color:var(--accent); }
+  .tag-uber { background:rgba(6,193,103,0.15); color:var(--uber); }
+  .tag-custom { background:rgba(160,79,255,0.15); color:var(--purple); }
+  .inc-radio { width:20px; height:20px; border-radius:50%; border:2px solid var(--border); display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:8px; transition:all 0.2s; }
+  .inc-btn.active .inc-radio { border-color:var(--purple); background:var(--purple); }
+  .inc-radio::after { content:''; width:8px; height:8px; border-radius:50%; background:white; opacity:0; transform:scale(0); transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1); }
+  .inc-btn.active .inc-radio::after { opacity:1; transform:scale(1); }
 
-  /* ── PLATFORM ── */
-  .platform-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .platform-btn {
-    background: var(--surface); border: 2px solid var(--border);
-    border-radius: var(--radius); padding: 18px 12px;
-    cursor: pointer; transition: all 0.25s;
-    display: flex; flex-direction: column; align-items: center; gap: 7px;
-    position: relative;
-  }
-  .platform-btn:active { transform: scale(0.96); }
-  .platform-btn.uber.active { border-color: var(--uber); background: rgba(6,193,103,0.09); box-shadow: 0 0 20px rgba(6,193,103,0.12); }
-  .platform-btn.just.active { border-color: var(--just); background: rgba(255,128,0,0.09); box-shadow: 0 0 20px rgba(255,128,0,0.12); }
-  .platform-logo { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; line-height: 1; }
-  .platform-btn.uber .platform-logo { color: var(--uber); }
-  .platform-btn.just .platform-logo { color: var(--just); }
-  .platform-check { position: absolute; top: 8px; right: 8px; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; opacity: 0; transform: scale(0); transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1); }
-  .platform-btn.uber .platform-check { background: var(--uber); }
-  .platform-btn.just .platform-check { background: var(--just); }
-  .platform-btn.active .platform-check { opacity: 1; transform: scale(1); }
-  .platform-email { font-family: 'Space Mono', monospace; font-size: 7.5px; color: var(--text-muted); text-align: center; line-height: 1.5; }
+  /* NUEVA INCIDENCIA */
+  .nueva-box { background:var(--surface); border:1px solid var(--border); border-radius:var(--r); overflow:hidden; margin-top:10px; }
+  .nueva-header { padding:13px 15px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; }
+  .nueva-label { font-size:13px; font-weight:600; color:var(--muted); display:flex; align-items:center; gap:8px; }
+  .nueva-body { padding:0 15px 15px; display:none; }
+  .nueva-body.open { display:block; }
+  .nueva-input { width:100%; background:var(--bg); border:1.5px solid var(--border); border-radius:var(--rsm); padding:11px 13px; font-family:'DM Sans',sans-serif; font-size:13px; color:var(--text); outline:none; transition:border-color 0.2s; }
+  .nueva-input:focus { border-color:var(--purple); }
+  .nueva-save { width:100%; margin-top:8px; background:var(--purple); border:none; border-radius:var(--rsm); padding:12px; font-family:'Bebas Neue',sans-serif; font-size:15px; letter-spacing:2px; color:white; cursor:pointer; }
 
-  /* ── FIELDS ── */
-  .fields-grid { display: flex; flex-direction: column; gap: 11px; }
-  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
-  .field-group { display: flex; flex-direction: column; gap: 6px; }
-  .field-label { font-family: 'Space Mono', monospace; font-size: 8.5px; color: var(--text-muted); letter-spacing: 1.5px; text-transform: uppercase; }
-  .field-input {
-    width: 100%; background: var(--surface); border: 1.5px solid var(--border);
-    border-radius: var(--radius-sm); padding: 12px 14px;
-    font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: var(--text);
-    outline: none; transition: all 0.2s;
-  }
-  .field-input:focus { border-color: var(--c3); background: var(--surface2); }
-  .field-input.error { border-color: var(--danger); }
-  .field-input::placeholder { color: var(--text-muted); font-size: 12px; font-weight: 400; }
-  textarea.field-input { resize: none; min-height: 72px; line-height: 1.5; }
+  /* PEDIDOS */
+  .restaurante-wrap { position:relative; }
+  .autocomplete-list { position:absolute; top:100%; left:0; right:0; z-index:50; background:var(--surface2); border:1px solid var(--border); border-radius:var(--rsm); overflow:hidden; box-shadow:0 8px 24px rgba(0,0,0,0.4); display:none; }
+  .autocomplete-list.open { display:block; }
+  .ac-item { padding:11px 14px; font-size:13px; cursor:pointer; border-bottom:1px solid var(--border); transition:background 0.15s; }
+  .ac-item:last-child { border-bottom:none; }
+  .ac-item:active { background:var(--surface); }
 
-  /* Autocomplete */
-  .autocomplete-wrap { position: relative; }
-  .autocomplete-list {
-    position: absolute; top: 100%; left: 0; right: 0; z-index: 50;
-    background: var(--surface2); border: 1px solid var(--border);
-    border-radius: var(--radius-sm); overflow: hidden;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.4); display: none;
-  }
-  .autocomplete-list.open { display: block; }
-  .autocomplete-item { padding: 11px 14px; font-size: 13px; cursor: pointer; transition: background 0.15s; border-bottom: 1px solid var(--border); }
-  .autocomplete-item:last-child { border-bottom: none; }
-  .autocomplete-item:active { background: var(--surface); }
+  .field-label { font-family:'Space Mono',monospace; font-size:8.5px; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:6px; display:block; }
+  .field-input { width:100%; background:var(--surface); border:1.5px solid var(--border); border-radius:var(--rsm); padding:13px 14px; font-family:'DM Sans',sans-serif; font-size:14px; font-weight:500; color:var(--text); outline:none; transition:all 0.2s; }
+  .field-input:focus { border-color:var(--accent); background:var(--surface2); }
+  .field-input.error { border-color:var(--danger); }
+  .field-input::placeholder { color:var(--muted); font-size:12px; font-weight:400; }
 
-  /* ── INCIDENCIAS ── */
-  .incidence-list { display: flex; flex-direction: column; gap: 10px; }
-  .incidence-btn {
-    background: var(--surface); border: 2px solid var(--border);
-    border-radius: var(--radius); padding: 15px 16px;
-    cursor: pointer; transition: all 0.2s;
-    display: flex; align-items: flex-start; gap: 12px;
-    text-align: left; position: relative; overflow: hidden;
-  }
-  .incidence-btn:active { transform: scale(0.99); }
-  .incidence-btn.active { border-color: var(--c4); background: rgba(160,79,255,0.07); box-shadow: 0 0 20px rgba(160,79,255,0.1); }
-  .incidence-btn::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--c4); opacity: 0; transition: opacity 0.2s; }
-  .incidence-btn.active::before { opacity: 1; }
-  .incidence-icon { font-size: 20px; min-width: 34px; height: 34px; background: var(--surface2); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .incidence-content { flex: 1; }
-  .incidence-title { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 3px; line-height: 1.3; }
-  .incidence-sub { font-family: 'Space Mono', monospace; font-size: 8.5px; color: var(--text-muted); line-height: 1.6; }
-  .incidence-tag { display: inline-block; font-size: 7.5px; padding: 2px 6px; border-radius: 4px; margin-top: 5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
-  .tag-uber { background: rgba(6,193,103,0.15); color: var(--uber); }
-  .tag-just { background: rgba(255,128,0,0.15); color: var(--just); }
-  .tag-both { background: rgba(79,159,255,0.15); color: var(--accent); }
-  .tag-custom { background: rgba(160,79,255,0.15); color: var(--purple); }
-  .incidence-radio { width: 19px; height: 19px; border-radius: 50%; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 7px; transition: all 0.2s; }
-  .incidence-btn.active .incidence-radio { border-color: var(--c4); background: var(--c4); }
-  .incidence-radio::after { content: ''; width: 7px; height: 7px; border-radius: 50%; background: white; opacity: 0; transform: scale(0); transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1); }
-  .incidence-btn.active .incidence-radio::after { opacity: 1; transform: scale(1); }
+  /* PEDIDOS LIST */
+  .pedidos-stack { display:flex; flex-direction:column; gap:8px; margin-top:12px; }
+  .pedido-row { display:flex; align-items:center; gap:8px; background:var(--surface2); border:1px solid var(--border); border-radius:var(--rsm); padding:10px 14px; }
+  .pedido-num { font-family:'Space Mono',monospace; font-size:11px; color:var(--accent); flex:1; word-break:break-all; }
+  .pedido-del { background:none; border:none; color:var(--danger); font-size:16px; cursor:pointer; padding:2px 6px; opacity:0.6; flex-shrink:0; }
+  .pedido-del:active { opacity:1; }
 
-  /* Nueva incidencia */
-  .nueva-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-top: 10px; }
-  .nueva-header { padding: 13px 15px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
-  .nueva-header-label { font-size: 13px; font-weight: 600; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
-  .nueva-body { padding: 0 15px 15px; display: none; }
-  .nueva-body.open { display: block; }
-  .nueva-input { width: 100%; background: var(--bg); border: 1.5px solid var(--border); border-radius: var(--radius-sm); padding: 11px 13px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--text); outline: none; transition: border-color 0.2s; }
-  .nueva-input:focus { border-color: var(--c4); }
-  .nueva-save-btn { width: 100%; margin-top: 8px; background: var(--c4); border: none; border-radius: var(--radius-sm); padding: 12px; font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 2px; color: white; cursor: pointer; transition: all 0.2s; }
-  .nueva-save-btn:active { opacity: 0.85; transform: scale(0.98); }
+  .add-pedido-btn { width:100%; margin-top:10px; background:none; border:2px dashed var(--border); border-radius:var(--rsm); padding:13px; font-family:'Bebas Neue',sans-serif; font-size:15px; letter-spacing:2px; color:var(--muted); cursor:pointer; transition:all 0.2s; display:flex; align-items:center; justify-content:center; gap:8px; }
+  .add-pedido-btn:active { border-color:var(--accent); color:var(--accent); transform:scale(0.98); }
 
-  /* ── PREVIEW ── */
-  .preview-card { background: var(--surface); border: 1.5px solid rgba(0,229,160,0.25); border-radius: var(--radius); overflow: hidden; display: none; }
-  .preview-card.visible { display: block; }
-  .preview-header { padding: 13px 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: rgba(0,229,160,0.04); }
-  .preview-title { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--c5); text-transform: uppercase; }
-  .preview-platform { font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 2px; }
-  .preview-platform.uber { color: var(--uber); }
-  .preview-platform.just { color: var(--just); }
-  .preview-meta { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 7px; }
-  .preview-row { display: flex; gap: 10px; align-items: flex-start; }
-  .preview-key { font-family: 'Space Mono', monospace; font-size: 8.5px; color: var(--text-muted); min-width: 58px; text-transform: uppercase; letter-spacing: 1px; padding-top: 2px; }
-  .preview-val { font-size: 12px; font-weight: 600; color: var(--text); flex: 1; word-break: break-word; }
-  .preview-val.uber { color: var(--uber); }
-  .preview-val.just { color: var(--just); }
-  .preview-body-text { font-family: 'Space Mono', monospace; font-size: 9.5px; color: var(--text-muted); white-space: pre-wrap; line-height: 1.8; background: var(--bg); border-radius: var(--radius-sm); padding: 13px; border: 1px solid var(--border); max-height: 200px; overflow-y: auto; margin: 12px 16px; }
+  .codigo-row { display:flex; gap:8px; }
+  .codigo-row .field-input { flex:1; }
+  .codigo-add-btn { background:var(--accent); border:none; border-radius:var(--rsm); padding:13px 16px; font-family:'Bebas Neue',sans-serif; font-size:16px; color:white; cursor:pointer; flex-shrink:0; transition:all 0.2s; }
+  .codigo-add-btn:active { transform:scale(0.96); opacity:0.9; }
 
-  /* ── INFORME ── */
-  .informe-card { background: var(--surface); border: 1.5px solid rgba(255,68,102,0.2); border-radius: var(--radius); overflow: hidden; }
-  .informe-empty { text-align: center; padding: 24px; font-size: 12px; color: var(--text-muted); line-height: 1.6; }
-  .informe-counter { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-bottom: 1px solid var(--border); background: rgba(255,68,102,0.04); }
-  .informe-counter-num { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--c6); line-height: 1; }
-  .informe-counter-label { font-family: 'Space Mono', monospace; font-size: 8px; color: var(--text-muted); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 2px; }
-  .informe-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
-  .informe-stat { background: var(--surface); padding: 12px; text-align: center; }
-  .informe-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 22px; line-height: 1; }
-  .informe-stat-label { font-family: 'Space Mono', monospace; font-size: 7.5px; color: var(--text-muted); letter-spacing: 1px; margin-top: 2px; }
-  .informe-stat-num.uber { color: var(--uber); }
-  .informe-stat-num.just { color: var(--just); }
+  /* PREVIEW */
+  .preview-card { background:var(--surface); border:1.5px solid rgba(0,229,160,0.2); border-radius:var(--r); overflow:hidden; display:none; }
+  .preview-card.visible { display:block; }
+  .preview-header { padding:13px 16px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; background:rgba(0,229,160,0.04); }
+  .preview-title { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--success); text-transform:uppercase; }
+  .preview-plat { font-family:'Bebas Neue',sans-serif; font-size:15px; letter-spacing:2px; }
+  .preview-plat.uber { color:var(--uber); } .preview-plat.just { color:var(--just); }
+  .preview-meta { padding:12px 16px; border-bottom:1px solid var(--border); display:flex; flex-direction:column; gap:7px; }
+  .preview-row { display:flex; gap:10px; }
+  .preview-key { font-family:'Space Mono',monospace; font-size:8.5px; color:var(--muted); min-width:55px; text-transform:uppercase; letter-spacing:1px; padding-top:2px; }
+  .preview-val { font-size:12px; font-weight:600; color:var(--text); flex:1; word-break:break-word; }
+  .preview-val.uber { color:var(--uber); } .preview-val.just { color:var(--just); }
+  .preview-body { font-family:'Space Mono',monospace; font-size:9.5px; color:var(--muted); white-space:pre-wrap; line-height:1.8; background:var(--bg); border-radius:var(--rsm); padding:13px; border:1px solid var(--border); max-height:220px; overflow-y:auto; margin:12px 16px; }
 
-  .incidencia-log { border-top: 1px solid var(--border); }
-  .log-item { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; gap: 12px; align-items: flex-start; }
-  .log-item:last-child { border-bottom: none; }
-  .log-num { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: var(--c6); min-width: 30px; line-height: 1; }
-  .log-content { flex: 1; }
-  .log-hora { font-family: 'Space Mono', monospace; font-size: 8.5px; color: var(--text-muted); letter-spacing: 1px; }
-  .log-restaurante { font-size: 13px; font-weight: 700; color: var(--text); margin: 2px 0; }
-  .log-detalle { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
-  .log-badge { display: inline-block; font-size: 7.5px; padding: 2px 6px; border-radius: 4px; font-weight: 700; letter-spacing: 1px; margin-top: 4px; }
-  .log-badge.uber { background: rgba(6,193,103,0.15); color: var(--uber); }
-  .log-badge.just { background: rgba(255,128,0,0.15); color: var(--just); }
+  /* INFORME */
+  .informe-card { background:var(--surface); border:1.5px solid rgba(255,68,102,0.2); border-radius:var(--r); overflow:hidden; }
+  .informe-empty { text-align:center; padding:24px; font-size:12px; color:var(--muted); line-height:1.8; }
+  .inf-counter { display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-bottom:1px solid var(--border); background:rgba(255,68,102,0.04); }
+  .inf-num { font-family:'Bebas Neue',sans-serif; font-size:38px; color:var(--danger); line-height:1; }
+  .inf-label { font-family:'Space Mono',monospace; font-size:8px; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; margin-top:2px; }
+  .inf-stats { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); }
+  .inf-stat { background:var(--surface); padding:12px; text-align:center; }
+  .inf-stat-num { font-family:'Bebas Neue',sans-serif; font-size:24px; line-height:1; }
+  .inf-stat-num.uber { color:var(--uber); } .inf-stat-num.just { color:var(--just); }
+  .inf-stat-label { font-family:'Space Mono',monospace; font-size:7.5px; color:var(--muted); letter-spacing:1px; margin-top:2px; }
+  .log-list { border-top:1px solid var(--border); }
+  .log-item { padding:12px 16px; border-bottom:1px solid var(--border); display:flex; gap:12px; }
+  .log-item:last-child { border-bottom:none; }
+  .log-n { font-family:'Bebas Neue',sans-serif; font-size:20px; color:var(--danger); min-width:32px; line-height:1; }
+  .log-c { flex:1; }
+  .log-hora { font-family:'Space Mono',monospace; font-size:8px; color:var(--muted); }
+  .log-rest { font-size:14px; font-weight:700; color:var(--text); margin:2px 0; }
+  .log-det { font-size:11px; color:var(--muted); }
+  .log-badge { display:inline-block; font-size:7.5px; padding:2px 6px; border-radius:4px; font-weight:700; letter-spacing:1px; margin-top:4px; }
+  .log-badge.uber { background:rgba(6,193,103,0.15); color:var(--uber); }
+  .log-badge.just { background:rgba(255,128,0,0.15); color:var(--just); }
+  .inf-actions { display:flex; flex-direction:column; gap:10px; padding:14px 16px; border-top:1px solid var(--border); }
+  .inf-btn { width:100%; border:none; border-radius:var(--rsm); padding:14px; font-family:'Bebas Neue',sans-serif; font-size:16px; letter-spacing:2.5px; color:white; cursor:pointer; transition:all 0.2s; display:flex; align-items:center; justify-content:center; gap:8px; }
+  .inf-btn:active { transform:scale(0.98); opacity:0.9; }
+  .btn-wa { background:linear-gradient(135deg,#25D366,#128C7E); box-shadow:0 4px 20px rgba(37,211,102,0.2); }
+  .btn-email { background:linear-gradient(135deg,#4f9fff,#2b6bcc); box-shadow:0 4px 20px rgba(79,159,255,0.2); }
+  .btn-reset { background:var(--surface2); border:1px solid var(--border); color:var(--danger); box-shadow:none; font-size:14px; }
 
-  .informe-actions { display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; border-top: 1px solid var(--border); }
-  .informe-btn { width: 100%; border: none; border-radius: var(--radius-sm); padding: 14px; font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 2.5px; color: white; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
-  .informe-btn:active { transform: scale(0.98); opacity: 0.9; }
-  .btn-pdf { background: linear-gradient(135deg, #ff4466, #cc0033); box-shadow: 0 4px 20px rgba(255,68,102,0.25); }
-  .btn-wa { background: linear-gradient(135deg, #25D366, #128C7E); box-shadow: 0 4px 20px rgba(37,211,102,0.25); }
-  .btn-email { background: linear-gradient(135deg, #4f9fff, #2b6bcc); box-shadow: 0 4px 20px rgba(79,159,255,0.25); }
-  .btn-reset { background: var(--surface2); border: 1px solid var(--border); color: var(--danger); box-shadow: none; font-size: 14px; }
+  /* CTA */
+  .cta-wrap { position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:480px; padding:12px 20px 26px; background:linear-gradient(to top,var(--bg) 65%,transparent); z-index:200; }
+  .cta-row { display:flex; gap:10px; margin-bottom:8px; }
+  .cta-btn { flex:1; background:linear-gradient(135deg,#4f9fff,#2b6bcc); border:none; border-radius:var(--r); padding:17px; font-family:'Bebas Neue',sans-serif; font-size:19px; letter-spacing:2.5px; color:white; cursor:pointer; transition:all 0.2s; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 6px 24px rgba(79,159,255,0.28); }
+  .cta-btn:active { transform:scale(0.98); }
+  .cta-btn.disabled { background:var(--surface2); box-shadow:none; opacity:0.35; pointer-events:none; }
+  .cta-reset { flex:0 0 auto; background:var(--surface2); border:1.5px solid var(--border); border-radius:var(--r); padding:17px 18px; font-size:18px; cursor:pointer; transition:all 0.2s; }
+  .cta-reset:active { transform:scale(0.97); }
+  .test-zone { text-align:center; }
+  .test-btn { background:none; border:none; font-family:'Space Mono',monospace; font-size:9px; color:var(--muted); cursor:pointer; padding:4px 8px; opacity:0.4; letter-spacing:1px; text-decoration:underline; }
 
-  /* ── CTA ── */
-  .cta-wrap {
-    position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
-    width: 100%; max-width: 480px; padding: 12px 20px 26px;
-    background: linear-gradient(to top, var(--bg) 65%, transparent); z-index: 200;
-  }
-  .cta-row { display: flex; gap: 10px; margin-bottom: 8px; }
-  .cta-btn {
-    flex: 1; background: linear-gradient(135deg, #4f9fff 0%, #2b6bcc 100%);
-    border: none; border-radius: var(--radius); padding: 16px;
-    font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 2.5px;
-    color: white; cursor: pointer; transition: all 0.2s;
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-    box-shadow: 0 6px 24px rgba(79,159,255,0.28);
-  }
-  .cta-btn:active { transform: scale(0.98); }
-  .cta-btn.disabled { background: var(--surface2); box-shadow: none; opacity: 0.35; pointer-events: none; }
-  .cta-reset { flex: 0 0 auto; background: var(--surface2); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 16px 18px; font-size: 18px; cursor: pointer; transition: all 0.2s; }
-  .cta-reset:active { transform: scale(0.97); }
-  .test-zone { text-align: center; }
-  .test-btn { background: none; border: none; font-family: 'Space Mono', monospace; font-size: 9px; color: var(--text-muted); cursor: pointer; padding: 4px 8px; opacity: 0.4; letter-spacing: 1px; text-decoration: underline; }
-  .test-btn:active { opacity: 0.9; }
+  /* TOAST */
+  .toast { position:fixed; top:110px; left:50%; transform:translateX(-50%) translateY(-20px); background:var(--surface2); border:1px solid var(--border); border-radius:var(--rsm); padding:11px 20px; font-size:13px; font-weight:600; z-index:999; opacity:0; transition:all 0.3s; white-space:nowrap; backdrop-filter:blur(12px); pointer-events:none; }
+  .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+  .toast.success { border-color:var(--success); color:var(--success); }
+  .toast.error { border-color:var(--danger); color:var(--danger); }
+  .toast.warning { border-color:var(--just); color:var(--just); }
 
-  /* ── TOAST ── */
-  .toast { position: fixed; top: 110px; left: 50%; transform: translateX(-50%) translateY(-20px); background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 11px 20px; font-size: 13px; font-weight: 600; z-index: 999; opacity: 0; transition: all 0.3s; white-space: nowrap; backdrop-filter: blur(12px); pointer-events: none; }
-  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-  .toast.success { border-color: var(--success); color: var(--success); }
-  .toast.error { border-color: var(--danger); color: var(--danger); }
-  .toast.warning { border-color: var(--just); color: var(--just); }
-
-  .divider { height: 20px; }
-  .chevron { transition: transform 0.2s; color: var(--text-muted); font-size: 11px; }
-  .chevron.open { transform: rotate(180deg); }
+  .divider { height:20px; }
+  .chevron { transition:transform 0.2s; color:var(--muted); font-size:11px; }
+  .chevron.open { transform:rotate(180deg); }
+  .footer-credit { text-align:center; padding:10px; font-family:'Space Mono',monospace; font-size:8px; color:var(--muted); opacity:0.4; letter-spacing:1px; }
 </style>
 </head>
 <body>
@@ -300,104 +199,69 @@
   <div class="header">
     <div class="header-brand">
       <div class="header-logo">NEXFOOD</div>
-      <div class="header-sub">Gestión de Incidencias</div>
+      <div class="header-sub">Sistema de Incidencias</div>
     </div>
-    <div class="header-status">
+    <div class="header-badge">
       <div class="status-dot"></div>
       <span id="incCount">0 HOY</span>
     </div>
   </div>
-
-  <!-- PROGRESS -->
-  <div class="progress-bar">
-    <div class="prog-step" id="ps1"><div class="prog-dot">1</div></div>
-    <div class="prog-line"></div>
-    <div class="prog-step" id="ps2"><div class="prog-dot">2</div></div>
-    <div class="prog-line"></div>
-    <div class="prog-step" id="ps3"><div class="prog-dot">3</div></div>
-    <div class="prog-line"></div>
-    <div class="prog-step" id="ps4"><div class="prog-dot">4</div></div>
-  </div>
-
   <div class="timestamp" id="timestamp"></div>
 
   <!-- 01 PLATAFORMA -->
-  <div class="section sec-2">
+  <div class="section sec-1">
     <div class="section-label"><span class="section-num">01</span>Plataforma</div>
     <div class="platform-grid">
-      <div class="platform-btn uber" onclick="selectPlatform('uber', this)">
+      <div class="platform-btn uber" onclick="selectPlatform('uber',this)">
         <div class="platform-check">✓</div>
         <div class="platform-logo">UBER EATS</div>
-        <div class="platform-email">restaurantes.es<br>@uber.com</div>
+        <div class="platform-email">restaurantes.es@uber.com</div>
       </div>
-      <div class="platform-btn just" onclick="selectPlatform('just', this)">
+      <div class="platform-btn just" onclick="selectPlatform('just',this)">
         <div class="platform-check">✓</div>
         <div class="platform-logo">JUST EAT</div>
-        <div class="platform-email">migestor<br>@just-eat.es</div>
+        <div class="platform-email">migestor@just-eat.es</div>
       </div>
     </div>
   </div>
 
   <div class="divider"></div>
 
-  <!-- 02 DATOS DEL PEDIDO -->
-  <div class="section sec-3">
-    <div class="section-label"><span class="section-num">02</span>Datos del Pedido</div>
-    <div class="fields-grid">
-      <div class="field-row">
-        <div class="field-group">
-          <label class="field-label">Nº Pedido *</label>
-          <input class="field-input" id="f-numero" type="text" placeholder="Ej: 4892-ABCD" oninput="updatePreview(); checkProgress()">
-        </div>
-        <div class="field-group">
-          <label class="field-label">Hora</label>
-          <input class="field-input" id="f-hora" type="time" oninput="updatePreview()">
-        </div>
-      </div>
-      <div class="field-group autocomplete-wrap">
-        <label class="field-label">Restaurante *</label>
-        <input class="field-input" id="f-restaurante" type="text" placeholder="Nombre del restaurante" oninput="onRestauranteInput()" autocomplete="off">
-        <div class="autocomplete-list" id="autocompleteList"></div>
-      </div>
-      <div class="field-group">
-        <label class="field-label">Nombre del Cliente</label>
-        <input class="field-input" id="f-cliente" type="text" placeholder="Nombre completo" oninput="updatePreview()">
-      </div>
-      <div class="field-group">
-        <label class="field-label">Dirección de Entrega</label>
-        <input class="field-input" id="f-direccion" type="text" placeholder="Calle, número, piso..." oninput="updatePreview()">
-      </div>
-      <div class="field-group">
-        <label class="field-label">Productos del Pedido</label>
-        <textarea class="field-input" id="f-productos" placeholder="Ej: 2x Burger Clásica, 1x Patatas..." oninput="updatePreview()"></textarea>
-      </div>
-      <div class="field-row">
-        <div class="field-group">
-          <label class="field-label">Total (€)</label>
-          <input class="field-input" id="f-total" type="text" placeholder="0.00" oninput="updatePreview()">
-        </div>
-        <div class="field-group">
-          <label class="field-label">Fecha</label>
-          <input class="field-input" id="f-fecha" type="date" oninput="updatePreview()">
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- 03 INCIDENCIA -->
-  <div class="section sec-4">
-    <div class="section-label"><span class="section-num">03</span>Tipo de Incidencia</div>
-    <div class="incidence-list" id="incidenceList"></div>
+  <!-- 02 INCIDENCIA -->
+  <div class="section sec-2">
+    <div class="section-label"><span class="section-num">02</span>Tipo de Incidencia</div>
+    <div class="inc-list" id="incList"></div>
     <div class="nueva-box">
       <div class="nueva-header" onclick="toggleNueva()">
-        <div class="nueva-header-label">➕ Crear nueva incidencia</div>
+        <div class="nueva-label">➕ Crear nueva incidencia</div>
         <span class="chevron" id="nuevaChevron">▼</span>
       </div>
       <div class="nueva-body" id="nuevaBody">
-        <input class="nueva-input" id="nuevaTexto" type="text" placeholder="Texto de la incidencia...">
-        <button class="nueva-save-btn" onclick="guardarNueva()">💾 GUARDAR INCIDENCIA</button>
+        <input class="nueva-input" id="nuevaTexto" type="text" placeholder="Texto de la observación...">
+        <button class="nueva-save" onclick="guardarNueva()">💾 GUARDAR</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 03 PEDIDOS -->
+  <div class="section sec-3">
+    <div class="section-label"><span class="section-num">03</span>Restaurante y Códigos</div>
+
+    <label class="field-label">Restaurante *</label>
+    <div class="restaurante-wrap">
+      <input class="field-input" id="f-restaurante" type="text" placeholder="Nombre del restaurante" oninput="onRestInput()" autocomplete="off">
+      <div class="autocomplete-list" id="acList"></div>
+    </div>
+
+    <div class="pedidos-stack" id="pedidosStack"></div>
+
+    <div style="margin-top:12px">
+      <label class="field-label">Código / Nº Pedido *</label>
+      <div class="codigo-row">
+        <input class="field-input" id="f-codigo" type="text" placeholder="Ej: #186261516" onkeydown="if(event.key==='Enter')addCodigo()">
+        <button class="codigo-add-btn" onclick="addCodigo()">+</button>
       </div>
     </div>
   </div>
@@ -405,71 +269,62 @@
   <div class="divider"></div>
 
   <!-- 04 PREVIEW -->
-  <div class="section sec-5">
+  <div class="section sec-4">
     <div class="section-label"><span class="section-num">04</span>Vista Previa del Correo</div>
     <div class="preview-card" id="previewCard">
       <div class="preview-header">
         <span class="preview-title">Correo generado</span>
-        <span class="preview-platform" id="prev-platform"></span>
+        <span class="preview-plat" id="prevPlat"></span>
       </div>
       <div class="preview-meta">
-        <div class="preview-row"><span class="preview-key">Para</span><span class="preview-val" id="prev-para"></span></div>
-        <div class="preview-row"><span class="preview-key">Asunto</span><span class="preview-val" id="prev-asunto"></span></div>
+        <div class="preview-row"><span class="preview-key">Para</span><span class="preview-val" id="prevPara"></span></div>
+        <div class="preview-row"><span class="preview-key">Asunto</span><span class="preview-val" id="prevAsunto"></span></div>
       </div>
-      <div class="preview-body-text" id="prev-cuerpo"></div>
+      <div class="preview-body" id="prevCuerpo"></div>
     </div>
-    <div style="text-align:center;padding:20px;font-size:11px;color:var(--text-muted)" id="previewEmpty">Completa plataforma e incidencia para ver el correo</div>
+    <div style="text-align:center;padding:20px;font-size:11px;color:var(--muted)" id="previewEmpty">Completa los pasos anteriores para ver el correo</div>
   </div>
 
   <div class="divider"></div>
 
-  <!-- 05 INFORME DE JORNADA -->
-  <div class="section sec-6">
+  <!-- 05 INFORME -->
+  <div class="section sec-5">
     <div class="section-label"><span class="section-num">05</span>Informe de Jornada</div>
-    <div class="informe-card" id="informeCard">
-      <div class="informe-empty" id="informeEmpty">📋 Sin incidencias registradas aún.<br>Envía la primera para verla aquí.</div>
-      <div id="informeContent" style="display:none">
-        <div class="informe-counter">
-          <div>
-            <div class="informe-counter-num" id="inf-total">0</div>
-            <div class="informe-counter-label">Incidencias totales</div>
-          </div>
+    <div class="informe-card">
+      <div class="informe-empty" id="infEmpty">📋 Sin incidencias registradas.<br>Envía la primera para verla aquí.</div>
+      <div id="infContent" style="display:none">
+        <div class="inf-counter">
+          <div><div class="inf-num" id="infTotal">0</div><div class="inf-label">Incidencias hoy</div></div>
           <div style="text-align:right">
-            <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-muted)" id="inf-fecha"></div>
-            <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-muted);margin-top:4px" id="inf-total-eur"></div>
+            <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted)" id="infFecha"></div>
           </div>
         </div>
-        <div class="informe-stats">
-          <div class="informe-stat">
-            <div class="informe-stat-num uber" id="inf-uber">0</div>
-            <div class="informe-stat-label">Uber Eats</div>
-          </div>
-          <div class="informe-stat">
-            <div class="informe-stat-num just" id="inf-just">0</div>
-            <div class="informe-stat-label">Just Eat</div>
-          </div>
+        <div class="inf-stats">
+          <div class="inf-stat"><div class="inf-stat-num uber" id="infUber">0</div><div class="inf-stat-label">Uber Eats</div></div>
+          <div class="inf-stat"><div class="inf-stat-num just" id="infJust">0</div><div class="inf-stat-label">Just Eat</div></div>
         </div>
-        <div class="incidencia-log" id="logList"></div>
-        <div class="informe-actions">
-          <button class="informe-btn btn-wa" onclick="compartirWA()">📱 COMPARTIR POR WHATSAPP</button>
-          <button class="informe-btn btn-email" onclick="enviarEmailInforme()">✉️ ENVIAR INFORME POR EMAIL</button>
-          <button class="informe-btn btn-reset" onclick="confirmarReset()">🗑️ CERRAR JORNADA Y RESETEAR</button>
+        <div class="log-list" id="logList"></div>
+        <div class="inf-actions">
+          <button class="inf-btn btn-wa" onclick="compartirWA()">📱 COMPARTIR POR WHATSAPP</button>
+          <button class="inf-btn btn-email" onclick="enviarEmailInforme()">✉️ ENVIAR INFORME POR EMAIL</button>
+          <button class="inf-btn btn-reset" onclick="confirmarReset()">🗑️ CERRAR JORNADA Y RESETEAR</button>
         </div>
       </div>
     </div>
   </div>
 
-  <div style="height:200px"></div>
+  <div style="height:180px"></div>
+  <div class="footer-credit">Diseñado por: @lechpublicidad</div>
 </div>
 
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<!-- CTA FIJO -->
+<!-- CTA -->
 <div class="cta-wrap">
   <div class="cta-row">
     <button class="cta-btn disabled" id="ctaBtn" onclick="abrirCorreo(false)">✉️ ABRIR CORREO</button>
-    <button class="cta-reset" onclick="limpiarFormulario()" title="Limpiar formulario">🔄</button>
+    <button class="cta-reset" onclick="limpiar()" title="Limpiar">🔄</button>
   </div>
   <div class="test-zone">
     <button class="test-btn" onclick="abrirCorreo(true)">🧪 prueba → lechpublicidad1@gmail.com</button>
@@ -477,400 +332,286 @@
 </div>
 
 <script>
-  // ── CONFIG ────────────────────────────────────────
   const CFG = {
     email_salida: 'deliveryinternacional19@gmail.com',
     email_prueba: 'lechpublicidad1@gmail.com',
     email_admin:  'deliveryinternacional19@gmail.com',
     empresa: 'DELIVERY JYS EXPRESS INTERNACIONAL',
-    dir_empresa: 'AV 25 de Septiembre, 8',
+    dir: 'AV 25 de Septiembre, 8',
     tel: '604378509',
-    plataformas: {
-      uber: { nombre: 'Uber Eats', email: 'restaurantes.es@uber.com', color: 'uber' },
-      just: { nombre: 'Just Eat',  email: 'migestor@just-eat.es',    color: 'just' },
+    plats: {
+      uber: { nombre:'Uber Eats', email:'restaurantes.es@uber.com' },
+      just: { nombre:'Just Eat',  email:'migestor@just-eat.es' },
     },
   };
 
   const INC_DEFAULT = [
-    { id: 'no_contesta', icon: '📵', titulo: 'Cliente no contesta', observacion: 'CLIENTE NO CONTESTA.', asunto_uber: 'NO COBRO DE COMISION', asunto_just: 'NO COBRO DE COMISION', tag: 'tag-both', tag_texto: 'UBER EATS + JUST EAT', custom: false },
-    { id: 'cancelado',   icon: '❌', titulo: 'Pedido cancelado por el cliente', observacion: 'EL CLIENTE CANCELA EL PEDIDO, YA SE HABÍA PREPARADO.', asunto_uber: 'PEDIDO ENVIADO Y CANCELADO', asunto_just: 'NO COBRO DE COMISION', tag: 'tag-uber', tag_texto: 'PRINCIPALMENTE UBER EATS', custom: false },
+    {
+      id:'no_contesta', icon:'📵',
+      titulo:'Cliente no contesta',
+      observacion:'CLIENTE NO CONTESTA.',
+      asunto_uber:'NO COBRO DE COMISION',
+      asunto_just:'NO COBRO DE COMISION',
+      cuerpo:'El siguiente pedido no se envía y no se prepara , dado que el cliente no contesta ni responde las llamadas .',
+      tag:'tag-both', tag_texto:'UBER EATS + JUST EAT', custom:false,
+    },
+    {
+      id:'cancelado', icon:'❌',
+      titulo:'Pedido cancelado por el cliente',
+      observacion:'EL CLIENTE CANCELA EL PEDIDO, YA SE HABÍA PREPARADO.',
+      asunto_uber:'PEDIDO ENVIADO Y CANCELADO',
+      asunto_just:'NO COBRO DE COMISION',
+      cuerpo:`Por medio de la presente, solicito la revisión y reembolso correspondiente del pedido cancelado, ya que el cliente canceló el pedido.
+
+El pedido ya había sido preparado en su totalidad cuando el cliente procedió a cancelarlo, generando una pérdida operativa y económica.
+
+Agradecería su apoyo con la validación del caso y la gestión del reembolso correspondiente conforme a las políticas aplicables.`,
+      tag:'tag-uber', tag_texto:'PRINCIPALMENTE UBER EATS', custom:false,
+    },
   ];
 
-  const state = { platform: null, incidenceId: null, incidenceData: null };
+  const state = { platform:null, incId:null, incData:null, codigos:[] };
 
-  // ── STORAGE HELPERS ───────────────────────────────
-  const ls = {
-    get: (k, def=[]) => { try { return JSON.parse(localStorage.getItem(k)) ?? def; } catch(e){ return def; } },
-    set: (k,v) => localStorage.setItem(k, JSON.stringify(v)),
-  };
+  // ── STORAGE ───────────────────────────────────────
+  const ls = { get:(k,d)=>{ try{return JSON.parse(localStorage.getItem(k))??d}catch{return d} }, set:(k,v)=>localStorage.setItem(k,JSON.stringify(v)) };
 
   // ── RESTAURANTES AUTOCOMPLETE ─────────────────────
-  function getRestaurantes() { return ls.get('nx_restaurantes', []); }
-  function saveRestaurante(nombre) {
-    if (!nombre) return;
-    const arr = getRestaurantes();
-    if (!arr.includes(nombre)) { arr.unshift(nombre); ls.set('nx_restaurantes', arr.slice(0,30)); }
-  }
-
-  function onRestauranteInput() {
+  function getRests() { return ls.get('nx_rests',[]); }
+  function saveRest(n) { if(!n)return; const a=getRests(); if(!a.includes(n)){a.unshift(n);ls.set('nx_rests',a.slice(0,30));} }
+  function onRestInput() {
     const val = document.getElementById('f-restaurante').value.trim().toLowerCase();
-    const list = document.getElementById('autocompleteList');
-    const restaurantes = getRestaurantes();
-    const filtered = val ? restaurantes.filter(r => r.toLowerCase().includes(val)) : restaurantes;
-    if (filtered.length === 0) { list.classList.remove('open'); updatePreview(); return; }
-    list.innerHTML = filtered.slice(0,6).map(r => `<div class="autocomplete-item" onclick="selectRestaurante('${r.replace(/'/g,"\\'")}')">🏠 ${r}</div>`).join('');
+    const list = document.getElementById('acList');
+    const filtered = getRests().filter(r=>!val||r.toLowerCase().includes(val));
+    if(!filtered.length){list.classList.remove('open');updatePreview();return;}
+    list.innerHTML = filtered.slice(0,6).map(r=>`<div class="ac-item" onclick="selectRest('${r.replace(/'/g,"\\'")}')">${r}</div>`).join('');
     list.classList.add('open');
     updatePreview();
   }
+  function selectRest(n){document.getElementById('f-restaurante').value=n;document.getElementById('acList').classList.remove('open');updatePreview();}
+  document.addEventListener('click',e=>{if(!e.target.closest('.restaurante-wrap'))document.getElementById('acList').classList.remove('open');});
 
-  function selectRestaurante(nombre) {
-    document.getElementById('f-restaurante').value = nombre;
-    document.getElementById('autocompleteList').classList.remove('open');
+  // ── CODIGOS ───────────────────────────────────────
+  function addCodigo() {
+    const inp = document.getElementById('f-codigo');
+    const val = inp.value.trim();
+    if(!val){showToast('⚠️ Escribe un código primero','warning');return;}
+    if(state.codigos.includes(val)){showToast('⚠️ Código ya agregado','warning');return;}
+    state.codigos.push(val);
+    inp.value='';
+    renderCodigos();
     updatePreview();
   }
-
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('.autocomplete-wrap')) {
-      document.getElementById('autocompleteList').classList.remove('open');
-    }
-  });
+  function removeCodigo(i){state.codigos.splice(i,1);renderCodigos();updatePreview();}
+  function renderCodigos(){
+    const stack=document.getElementById('pedidosStack');
+    stack.innerHTML=state.codigos.map((c,i)=>`
+      <div class="pedido-row">
+        <span class="pedido-num">📦 ${c}</span>
+        <button class="pedido-del" onclick="removeCodigo(${i})">✕</button>
+      </div>`).join('');
+  }
 
   // ── INCIDENCIAS ───────────────────────────────────
-  function getCustom() { return ls.get('nx_incidencias', []); }
-  function allInc() { return [...INC_DEFAULT, ...getCustom()]; }
-
-  function renderIncidencias() {
-    const list = document.getElementById('incidenceList');
-    list.innerHTML = '';
-    allInc().forEach(inc => {
-      const div = document.createElement('div');
-      div.className = `incidence-btn${state.incidenceId === inc.id ? ' active' : ''}`;
-      div.onclick = () => selectIncidence(inc.id, div);
-      const del = inc.custom ? `<button onclick="event.stopPropagation();borrarInc('${inc.id}')" style="background:none;border:none;color:var(--danger);font-size:13px;cursor:pointer;padding:3px 6px;opacity:0.6;flex-shrink:0;margin-top:5px">✕</button>` : '';
-      div.innerHTML = `<div class="incidence-icon">${inc.icon}</div><div class="incidence-content"><div class="incidence-title">${inc.titulo}</div><div class="incidence-sub">${inc.observacion}</div><span class="incidence-tag ${inc.tag}">${inc.tag_texto}</span></div>${del}<div class="incidence-radio"></div>`;
+  function getCustom(){return ls.get('nx_inc',[]);}
+  function allInc(){return [...INC_DEFAULT,...getCustom()];}
+  function renderInc(){
+    const list=document.getElementById('incList');
+    list.innerHTML='';
+    allInc().forEach(inc=>{
+      const div=document.createElement('div');
+      div.className=`inc-btn${state.incId===inc.id?' active':''}`;
+      div.onclick=()=>selectInc(inc.id,div);
+      const del=inc.custom?`<button onclick="event.stopPropagation();delInc('${inc.id}')" style="background:none;border:none;color:var(--danger);font-size:13px;cursor:pointer;padding:3px 6px;opacity:0.6;flex-shrink:0;margin-top:5px">✕</button>`:'';
+      div.innerHTML=`<div class="inc-icon">${inc.icon}</div><div class="inc-content"><div class="inc-title">${inc.titulo}</div><div class="inc-sub">${inc.observacion}</div><span class="inc-tag ${inc.tag}">${inc.tag_texto}</span></div>${del}<div class="inc-radio"></div>`;
       list.appendChild(div);
     });
   }
-
-  function selectIncidence(id, el) {
-    const inc = allInc().find(i => i.id === id);
-    if (!inc) return;
-    state.incidenceId = id; state.incidenceData = inc;
-    document.querySelectorAll('.incidence-btn').forEach(b => b.classList.remove('active'));
+  function selectInc(id,el){
+    const inc=allInc().find(i=>i.id===id);
+    if(!inc)return;
+    state.incId=id; state.incData=inc;
+    document.querySelectorAll('.inc-btn').forEach(b=>b.classList.remove('active'));
     el.classList.add('active');
-    updatePreview(); checkProgress();
+    updatePreview();
   }
-
-  function borrarInc(id) {
-    ls.set('nx_incidencias', getCustom().filter(i => i.id !== id));
-    if (state.incidenceId === id) { state.incidenceId = null; state.incidenceData = null; }
-    renderIncidencias(); updatePreview();
-    showToast('Incidencia eliminada', 'warning');
-  }
-
-  function toggleNueva() {
-    const b = document.getElementById('nuevaBody'), c = document.getElementById('nuevaChevron');
-    b.classList.toggle('open'); c.classList.toggle('open', b.classList.contains('open'));
-  }
-
-  function guardarNueva() {
-    const txt = document.getElementById('nuevaTexto').value.trim();
-    if (!txt) { showToast('⚠️ Escribe el texto primero', 'warning'); return; }
-    const arr = getCustom();
-    arr.push({ id: 'c_'+Date.now(), icon: '📝', titulo: txt.length>45?txt.substring(0,45)+'…':txt, observacion: txt, asunto_uber: 'INCIDENCIA DE SERVICIO', asunto_just: 'INCIDENCIA DE SERVICIO', tag: 'tag-custom', tag_texto: 'PERSONALIZADA', custom: true });
-    ls.set('nx_incidencias', arr);
-    renderIncidencias();
-    document.getElementById('nuevaTexto').value = '';
+  function delInc(id){ls.set('nx_inc',getCustom().filter(i=>i.id!==id));if(state.incId===id){state.incId=null;state.incData=null;}renderInc();updatePreview();showToast('Eliminada','warning');}
+  function toggleNueva(){const b=document.getElementById('nuevaBody'),c=document.getElementById('nuevaChevron');b.classList.toggle('open');c.classList.toggle('open',b.classList.contains('open'));}
+  function guardarNueva(){
+    const txt=document.getElementById('nuevaTexto').value.trim();
+    if(!txt){showToast('⚠️ Escribe el texto','warning');return;}
+    const arr=getCustom();
+    arr.push({id:'c_'+Date.now(),icon:'📝',titulo:txt.length>45?txt.substring(0,45)+'…':txt,observacion:txt,asunto_uber:'INCIDENCIA DE SERVICIO',asunto_just:'INCIDENCIA DE SERVICIO',cuerpo:txt,tag:'tag-custom',tag_texto:'PERSONALIZADA',custom:true});
+    ls.set('nx_inc',arr);renderInc();
+    document.getElementById('nuevaTexto').value='';
     document.getElementById('nuevaBody').classList.remove('open');
     document.getElementById('nuevaChevron').classList.remove('open');
-    showToast('✓ Incidencia guardada', 'success');
+    showToast('✓ Guardada','success');
   }
 
   // ── PLATAFORMA ────────────────────────────────────
-  function selectPlatform(p, el) {
-    state.platform = p;
-    document.querySelectorAll('.platform-btn').forEach(b => b.classList.remove('active'));
+  function selectPlatform(p,el){
+    state.platform=p;
+    document.querySelectorAll('.platform-btn').forEach(b=>b.classList.remove('active'));
     el.classList.add('active');
-    updatePreview(); checkProgress();
+    updatePreview();
   }
-
-  // ── BORRADOR AUTO ─────────────────────────────────
-  function guardarBorrador() {
-    ls.set('nx_borrador', {
-      platform: state.platform,
-      incidenceId: state.incidenceId,
-      numero: document.getElementById('f-numero').value,
-      hora: document.getElementById('f-hora').value,
-      restaurante: document.getElementById('f-restaurante').value,
-      cliente: document.getElementById('f-cliente').value,
-      direccion: document.getElementById('f-direccion').value,
-      productos: document.getElementById('f-productos').value,
-      total: document.getElementById('f-total').value,
-      fecha: document.getElementById('f-fecha').value,
-    });
-  }
-
-  function cargarBorrador() {
-    const b = ls.get('nx_borrador', null);
-    if (!b) return;
-    if (b.platform) { state.platform = b.platform; document.querySelector(`.platform-btn.${b.platform}`)?.classList.add('active'); }
-    ['numero','hora','restaurante','cliente','direccion','productos','total','fecha'].forEach(k => { const el = document.getElementById('f-'+k); if(el && b[k]) el.value = b[k]; });
-    if (b.incidenceId) { state.incidenceId = b.incidenceId; state.incidenceData = allInc().find(i => i.id === b.incidenceId) || null; }
-    updatePreview(); checkProgress();
-  }
-
-  setInterval(guardarBorrador, 5000);
 
   // ── BUILD CUERPO ──────────────────────────────────
   function buildCuerpo() {
-    const numero     = document.getElementById('f-numero').value.trim();
-    const hora       = document.getElementById('f-hora').value;
-    const restaurante= document.getElementById('f-restaurante').value.trim();
-    const cliente    = document.getElementById('f-cliente').value.trim();
-    const direccion  = document.getElementById('f-direccion').value.trim();
-    const productos  = document.getElementById('f-productos').value.trim();
-    const total      = document.getElementById('f-total').value.trim();
-    const fecha      = document.getElementById('f-fecha').value;
-    const pData      = state.platform ? CFG.plataformas[state.platform] : null;
-    const iData      = state.incidenceData;
-    const fechaStr   = fecha ? new Date(fecha+'T12:00:00').toLocaleDateString('es-ES',{weekday:'long',year:'numeric',month:'long',day:'numeric'}) : '—';
+    const restaurante = document.getElementById('f-restaurante').value.trim();
+    const iData = state.incData;
+    if(!iData) return '';
 
-    return `Estimado equipo de soporte de ${pData?.nombre || '___'},
+    // Tabla de pedidos
+    let tabla = 'CÓDIGO\t\tRESTAURANTE\t\tOBSERVACION\n';
+    if(state.codigos.length > 0){
+      state.codigos.forEach(cod=>{
+        tabla += `${cod}\t\t${restaurante}\t\t${iData.observacion}\n`;
+      });
+    } else {
+      tabla += `—\t\t${restaurante}\t\t${iData.observacion}\n`;
+    }
 
-Por medio del presente correo, ${CFG.empresa}, con dirección en ${CFG.dir_empresa} y teléfono ${CFG.tel}, reporta la siguiente incidencia:
+    return `Cordial saludo
 
-━━━━━━━━━━━━━━━━━━━━━━━━━
-DATOS DEL PEDIDO
-━━━━━━━━━━━━━━━━━━━━━━━━━
-Número de pedido : ${numero || '—'}
-Restaurante      : ${restaurante || '—'}
-Fecha            : ${fechaStr}
-Hora             : ${hora || '—'}
-Cliente          : ${cliente || '—'}
-Dirección        : ${direccion || '—'}
-Productos        : ${productos || '—'}
-Total            : ${total ? total+' €' : '—'}
+${iData.cuerpo}
 
-━━━━━━━━━━━━━━━━━━━━━━━━━
-INCIDENCIA REPORTADA
-━━━━━━━━━━━━━━━━━━━━━━━━━
-Tipo             : ${iData?.titulo?.toUpperCase() || '—'}
-Observación      : ${iData?.observacion || '—'}
-
-Solicitamos que no se aplique comisión sobre este pedido en virtud de la incidencia descrita.
-
-Agradecemos su pronta gestión.
-
-Atentamente,
+${tabla}
 ${CFG.empresa}
-Correo: ${CFG.email_salida}
-Tel: ${CFG.tel}`;
+${CFG.dir} - ${CFG.tel}`;
   }
 
   // ── PREVIEW ───────────────────────────────────────
-  function updatePreview() {
-    const card = document.getElementById('previewCard');
-    const empty = document.getElementById('previewEmpty');
-    const btn = document.getElementById('ctaBtn');
-    if (!state.platform || !state.incidenceData) {
-      card.style.display = 'none'; empty.style.display = 'block'; btn.classList.add('disabled'); return;
-    }
-    const pData = CFG.plataformas[state.platform];
-    const iData = state.incidenceData;
-    const asunto = state.platform === 'uber' ? iData.asunto_uber : iData.asunto_just;
-    document.getElementById('prev-platform').textContent = pData.nombre;
-    document.getElementById('prev-platform').className = `preview-platform ${pData.color}`;
-    document.getElementById('prev-para').textContent = pData.email;
-    document.getElementById('prev-para').className = `preview-val ${pData.color}`;
-    document.getElementById('prev-asunto').textContent = asunto;
-    document.getElementById('prev-cuerpo').textContent = buildCuerpo();
-    card.style.display = 'block'; empty.style.display = 'none'; btn.classList.remove('disabled');
-  }
+  function updatePreview(){
+    const card=document.getElementById('previewCard');
+    const empty=document.getElementById('previewEmpty');
+    const btn=document.getElementById('ctaBtn');
+    const restaurante=document.getElementById('f-restaurante').value.trim();
 
-  // ── VALIDACIÓN ────────────────────────────────────
-  function validar() {
-    let ok = true;
-    const numero = document.getElementById('f-numero');
-    const restaurante = document.getElementById('f-restaurante');
-    if (!numero.value.trim()) { numero.classList.add('error'); ok = false; } else { numero.classList.remove('error'); }
-    if (!restaurante.value.trim()) { restaurante.classList.add('error'); ok = false; } else { restaurante.classList.remove('error'); }
-    if (!state.platform) { showToast('⚠️ Selecciona la plataforma', 'warning'); ok = false; }
-    else if (!state.incidenceData) { showToast('⚠️ Selecciona el tipo de incidencia', 'warning'); ok = false; }
-    else if (!ok) { showToast('⚠️ Nº pedido y restaurante son obligatorios', 'warning'); }
-    return ok;
+    if(!state.platform||!state.incData){
+      card.style.display='none';empty.style.display='block';btn.classList.add('disabled');return;
+    }
+
+    const pData=CFG.plats[state.platform];
+    const iData=state.incData;
+    const asunto=state.platform==='uber'?iData.asunto_uber:iData.asunto_just;
+
+    document.getElementById('prevPlat').textContent=pData.nombre;
+    document.getElementById('prevPlat').className=`preview-plat ${state.platform}`;
+    document.getElementById('prevPara').textContent=pData.email;
+    document.getElementById('prevPara').className=`preview-val ${state.platform}`;
+    document.getElementById('prevAsunto').textContent=asunto;
+    document.getElementById('prevCuerpo').textContent=buildCuerpo();
+
+    card.style.display='block';empty.style.display='none';btn.classList.remove('disabled');
   }
 
   // ── ABRIR CORREO ──────────────────────────────────
-  function abrirCorreo(esPrueba) {
-    if (!esPrueba && !validar()) return;
-    if (esPrueba && (!state.platform || !state.incidenceData)) { showToast('⚠️ Selecciona plataforma e incidencia', 'warning'); return; }
-    const pData  = CFG.plataformas[state.platform];
-    const iData  = state.incidenceData;
-    const asunto = state.platform === 'uber' ? iData.asunto_uber : iData.asunto_just;
-    const destino = esPrueba ? CFG.email_prueba : pData.email;
-    const cuerpo  = buildCuerpo() + (esPrueba ? '\n\n⚠️ CORREO DE PRUEBA — NO ES UNA INCIDENCIA REAL' : '');
+  function abrirCorreo(esPrueba){
+    const restaurante=document.getElementById('f-restaurante').value.trim();
+    if(!state.platform){showToast('⚠️ Selecciona la plataforma','warning');return;}
+    if(!state.incData){showToast('⚠️ Selecciona el tipo de incidencia','warning');return;}
+    if(!restaurante){document.getElementById('f-restaurante').classList.add('error');showToast('⚠️ Escribe el restaurante','warning');return;}
+    if(state.codigos.length===0){showToast('⚠️ Agrega al menos un código de pedido','warning');return;}
 
-    window.location.href = `mailto:${encodeURIComponent(destino)}?subject=${encodeURIComponent(esPrueba?'[PRUEBA] '+asunto:asunto)}&body=${encodeURIComponent(cuerpo)}`;
+    document.getElementById('f-restaurante').classList.remove('error');
 
-    if (!esPrueba) {
-      // Registrar en log
-      const restaurante = document.getElementById('f-restaurante').value.trim();
-      saveRestaurante(restaurante);
-      const log = ls.get('nx_log', []);
+    const pData=CFG.plats[state.platform];
+    const iData=state.incData;
+    const asunto=state.platform==='uber'?iData.asunto_uber:iData.asunto_just;
+    const destino=esPrueba?CFG.email_prueba:pData.email;
+    const cuerpo=buildCuerpo()+(esPrueba?'\n\n⚠️ CORREO DE PRUEBA — NO ES UNA INCIDENCIA REAL':'');
+
+    window.location.href=`mailto:${encodeURIComponent(destino)}?subject=${encodeURIComponent(esPrueba?'[PRUEBA] '+asunto:asunto)}&body=${encodeURIComponent(cuerpo)}`;
+
+    if(!esPrueba){
+      saveRest(restaurante);
+      const log=ls.get('nx_log',[]);
       log.push({
-        hora: new Date().toLocaleTimeString('es-ES',{timeZone:'Europe/Madrid',hour:'2-digit',minute:'2-digit'}),
-        fecha: new Date().toLocaleDateString('es-ES',{timeZone:'Europe/Madrid'}),
-        restaurante: restaurante || '—',
-        cliente: document.getElementById('f-cliente').value.trim() || '—',
-        numero: document.getElementById('f-numero').value.trim() || '—',
-        total: document.getElementById('f-total').value.trim() || '0',
-        plataforma: state.platform,
-        incidencia: iData.titulo,
+        hora:new Date().toLocaleTimeString('es-ES',{timeZone:'Europe/Madrid',hour:'2-digit',minute:'2-digit'}),
+        restaurante, plataforma:state.platform,
+        incidencia:iData.titulo,
+        codigos:[...state.codigos],
       });
-      ls.set('nx_log', log);
+      ls.set('nx_log',log);
       renderInforme();
-      showToast('✓ Correo abierto e incidencia registrada', 'success');
+      showToast('✓ Correo abierto e incidencia registrada','success');
     } else {
-      showToast('🧪 Abriendo prueba...', 'success');
+      showToast('🧪 Abriendo prueba...','success');
     }
   }
 
-  // ── LIMPIAR FORMULARIO ────────────────────────────
-  function limpiarFormulario() {
-    ['f-numero','f-hora','f-restaurante','f-cliente','f-direccion','f-productos','f-total'].forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
-    document.getElementById('f-fecha').value = getFechaHoy();
-    document.getElementById('f-hora').value = getHoraActual();
-    state.platform = null; state.incidenceId = null; state.incidenceData = null;
-    document.querySelectorAll('.platform-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.incidence-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.field-input').forEach(el => el.classList.remove('error'));
-    ls.set('nx_borrador', null);
-    updatePreview(); checkProgress();
-    showToast('✓ Formulario limpio', 'success');
+  // ── LIMPIAR ───────────────────────────────────────
+  function limpiar(){
+    state.platform=null;state.incId=null;state.incData=null;state.codigos=[];
+    document.getElementById('f-restaurante').value='';
+    document.getElementById('f-codigo').value='';
+    document.querySelectorAll('.platform-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.inc-btn').forEach(b=>b.classList.remove('active'));
+    document.getElementById('f-restaurante').classList.remove('error');
+    renderCodigos();updatePreview();
+    showToast('✓ Formulario limpio','success');
   }
 
   // ── INFORME ───────────────────────────────────────
-  function buildTextoInforme() {
-    const log = ls.get('nx_log', []);
-    if (!log.length) return '';
-    const uberCount = log.filter(i=>i.plataforma==='uber').length;
-    const justCount = log.filter(i=>i.plataforma==='just').length;
-    const totalEur  = log.reduce((s,i)=>s+parseFloat(i.total||0),0).toFixed(2);
-    const fecha     = new Date().toLocaleDateString('es-ES',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-
-    let txt = `📋 INFORME DE JORNADA\n${CFG.empresa}\nFecha: ${fecha}\n\n`;
-    txt += `━━━━━━━━━━━━━━━━━━━━━━━━━\nRESUMEN\n━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
-    txt += `Total incidencias : ${log.length}\nUber Eats         : ${uberCount}\nJust Eat          : ${justCount}\nTotal económico   : ${totalEur} €\n\n`;
-    txt += `━━━━━━━━━━━━━━━━━━━━━━━━━\nDETALLE\n━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
-    log.forEach((inc,i) => {
-      txt += `\nINC-${String(i+1).padStart(3,'0')} · ${inc.hora}\nRestaurante : ${inc.restaurante}\nPlataforma  : ${inc.plataforma==='uber'?'Uber Eats':'Just Eat'}\nCliente     : ${inc.cliente}\nPedido      : ${inc.numero}\nIncidencia  : ${inc.incidencia}\nTotal       : ${inc.total} €\n`;
+  function buildTextoInforme(){
+    const log=ls.get('nx_log',[]);
+    if(!log.length)return'';
+    const u=log.filter(i=>i.plataforma==='uber').length;
+    const j=log.filter(i=>i.plataforma==='just').length;
+    const fecha=new Date().toLocaleDateString('es-ES',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+    let txt=`📋 INFORME DE JORNADA\n${CFG.empresa}\nFecha: ${fecha}\n\n`;
+    txt+=`RESUMEN\nTotal: ${log.length} | Uber Eats: ${u} | Just Eat: ${j}\n\nDETALLE\n${'─'.repeat(40)}\n`;
+    log.forEach((inc,i)=>{
+      txt+=`\nINC-${String(i+1).padStart(3,'0')} · ${inc.hora}\nRestaurante : ${inc.restaurante}\nPlataforma  : ${inc.plataforma==='uber'?'Uber Eats':'Just Eat'}\nIncidencia  : ${inc.incidencia}\nCódigos     : ${(inc.codigos||[]).join(', ')}\n`;
     });
-    txt += `\n━━━━━━━━━━━━━━━━━━━━━━━━━\nGenerado por NEXFOOD · ${CFG.email_salida}`;
+    txt+=`\n${'─'.repeat(40)}\n${CFG.empresa} · ${CFG.email_salida}`;
     return txt;
   }
 
-  function renderInforme() {
-    const log = ls.get('nx_log', []);
-    const empty = document.getElementById('informeEmpty');
-    const content = document.getElementById('informeContent');
-    document.getElementById('incCount').textContent = log.length + ' HOY';
-
-    if (!log.length) { empty.style.display='block'; content.style.display='none'; return; }
-    empty.style.display='none'; content.style.display='block';
-
-    const uberCount = log.filter(i=>i.plataforma==='uber').length;
-    const justCount = log.filter(i=>i.plataforma==='just').length;
-    const totalEur  = log.reduce((s,i)=>s+parseFloat(i.total||0),0).toFixed(2);
-
-    document.getElementById('inf-total').textContent = log.length;
-    document.getElementById('inf-uber').textContent = uberCount;
-    document.getElementById('inf-just').textContent = justCount;
-    document.getElementById('inf-total-eur').textContent = totalEur + ' € total';
-    document.getElementById('inf-fecha').textContent = new Date().toLocaleDateString('es-ES',{day:'2-digit',month:'short',year:'numeric'}).toUpperCase();
-
-    const logList = document.getElementById('logList');
-    logList.innerHTML = log.map((inc,i) => `
+  function renderInforme(){
+    const log=ls.get('nx_log',[]);
+    document.getElementById('incCount').textContent=log.length+' HOY';
+    const empty=document.getElementById('infEmpty');
+    const content=document.getElementById('infContent');
+    if(!log.length){empty.style.display='block';content.style.display='none';return;}
+    empty.style.display='none';content.style.display='block';
+    document.getElementById('infTotal').textContent=log.length;
+    document.getElementById('infUber').textContent=log.filter(i=>i.plataforma==='uber').length;
+    document.getElementById('infJust').textContent=log.filter(i=>i.plataforma==='just').length;
+    document.getElementById('infFecha').textContent=new Date().toLocaleDateString('es-ES',{day:'2-digit',month:'short',year:'numeric'}).toUpperCase();
+    document.getElementById('logList').innerHTML=log.map((inc,i)=>`
       <div class="log-item">
-        <div class="log-num">${String(i+1).padStart(3,'0')}</div>
-        <div class="log-content">
-          <div class="log-hora">${inc.hora} · ${inc.numero}</div>
-          <div class="log-restaurante">${inc.restaurante}</div>
-          <div class="log-detalle">${inc.cliente} · ${inc.total} €</div>
-          <div class="log-detalle">${inc.incidencia}</div>
+        <div class="log-n">${String(i+1).padStart(3,'0')}</div>
+        <div class="log-c">
+          <div class="log-hora">${inc.hora}</div>
+          <div class="log-rest">${inc.restaurante}</div>
+          <div class="log-det">${inc.incidencia}</div>
+          <div class="log-det" style="font-family:'Space Mono',monospace;font-size:8px;margin-top:2px">${(inc.codigos||[]).join(' · ')}</div>
           <span class="log-badge ${inc.plataforma}">${inc.plataforma==='uber'?'UBER EATS':'JUST EAT'}</span>
         </div>
       </div>`).join('');
   }
 
-  function compartirWA() {
-    const txt = buildTextoInforme();
-    if (!txt) { showToast('Sin incidencias registradas', 'warning'); return; }
-    window.open('https://wa.me/?text=' + encodeURIComponent(txt), '_blank');
+  function compartirWA(){const txt=buildTextoInforme();if(!txt){showToast('Sin incidencias','warning');return;}window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');}
+  function enviarEmailInforme(){
+    const txt=buildTextoInforme();if(!txt){showToast('Sin incidencias','warning');return;}
+    const asunto=`Informe de Jornada · ${new Date().toLocaleDateString('es-ES')} · ${CFG.empresa}`;
+    window.location.href=`mailto:${encodeURIComponent(CFG.email_admin)}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(txt)}`;
   }
+  function confirmarReset(){if(confirm('¿Cerrar jornada y borrar todas las incidencias de hoy?\n\nAsegúrate de haber exportado el informe.')){ls.set('nx_log',[]);renderInforme();showToast('✓ Jornada cerrada','success');}}
 
-  function enviarEmailInforme() {
-    const txt = buildTextoInforme();
-    if (!txt) { showToast('Sin incidencias registradas', 'warning'); return; }
-    const asunto = `Informe de Jornada · ${new Date().toLocaleDateString('es-ES')} · ${CFG.empresa}`;
-    window.location.href = `mailto:${encodeURIComponent(CFG.email_admin)}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(txt)}`;
-    showToast('✓ Abriendo email del informe...', 'success');
-  }
+  // ── TIMESTAMP ────────────────────────────────────
+  function updateTime(){document.getElementById('timestamp').textContent=new Date().toLocaleString('es-ES',{timeZone:'Europe/Madrid',weekday:'long',year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'}).toUpperCase();}
+  updateTime();setInterval(updateTime,1000);
 
-  function confirmarReset() {
-    if (confirm('¿Cerrar jornada y borrar todas las incidencias de hoy?\n\nAsegúrate de haber exportado el informe antes.')) {
-      ls.set('nx_log', []);
-      renderInforme();
-      showToast('✓ Jornada cerrada. Nueva jornada lista.', 'success');
-    }
-  }
-
-  // ── PROGRESS ──────────────────────────────────────
-  function checkProgress() {
-    const p1 = !!state.platform;
-    const p2 = !!(document.getElementById('f-numero').value.trim() && document.getElementById('f-restaurante').value.trim());
-    const p3 = !!state.incidenceData;
-    const p4 = p1 && p2 && p3;
-    const steps = [p1, p2, p3, p4];
-    steps.forEach((done,i) => {
-      const el = document.getElementById('ps'+(i+1));
-      el.classList.toggle('done', done);
-      el.classList.toggle('active', !done && (i===0 || steps[i-1]));
-    });
-  }
-
-  // ── UTILS ─────────────────────────────────────────
-  function getFechaHoy() {
-    const now = new Date();
-    const pad = n => String(n).padStart(2,'0');
-    return `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}`;
-  }
-  function getHoraActual() {
-    const now = new Date();
-    const pad = n => String(n).padStart(2,'0');
-    return `${pad(now.getHours())}:${pad(now.getMinutes())}`;
-  }
-
-  function updateTime() {
-    document.getElementById('timestamp').textContent = new Date().toLocaleString('es-ES',{timeZone:'Europe/Madrid',weekday:'long',year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'}).toUpperCase();
-  }
-
-  let toastTimer = null;
-  function showToast(msg, type='success') {
-    const t = document.getElementById('toast');
-    t.textContent = msg; t.className = `toast ${type} show`;
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(()=>t.classList.remove('show'), 3200);
-  }
+  // ── TOAST ─────────────────────────────────────────
+  let tt=null;
+  function showToast(msg,type='success'){const t=document.getElementById('toast');t.textContent=msg;t.className=`toast ${type} show`;clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),3200);}
 
   // ── INIT ──────────────────────────────────────────
-  document.getElementById('f-fecha').value = getFechaHoy();
-  document.getElementById('f-hora').value  = getHoraActual();
-  renderIncidencias();
+  renderInc();
   renderInforme();
-  cargarBorrador();
-  updateTime();
-  setInterval(updateTime, 1000);
-  checkProgress();
 </script>
 </body>
 </html>
